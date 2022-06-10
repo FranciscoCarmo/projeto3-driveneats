@@ -60,6 +60,8 @@ header p {
   display: flex;
   flex-direction: column;
   background-color: #e5e5e5;
+
+  margin-bottom: calc(92px + 16px);
 }
 
 .conteudo h1 {
@@ -96,6 +98,8 @@ header p {
 
   padding: 18px 14px;
   padding-bottom: 15px;
+
+  cursor: pointer;
 }
 
 .prato:last-child {
@@ -161,7 +165,6 @@ header p {
 }
 
 .secaoSobremesa .prato {
-  margin-bottom: calc(92px + 16px);
 }
 
 footer {
@@ -187,10 +190,10 @@ footer button {
   background-color: #cbcbcb;
   color: white;
   font-size: 20px;
-  cursor: pointer;
 }
 
 .botaoLiberado {
   background-color: #32b72f;
   font-weight: 700;
+  cursor: pointer;
 }
