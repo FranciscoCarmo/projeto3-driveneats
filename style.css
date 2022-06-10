@@ -187,6 +187,7 @@ footer button {
   width: 364px;
 
   border-radius: 50px;
+  border: 1px solid #cbcbcb;
   background-color: #cbcbcb;
   color: white;
   font-size: 20px;
