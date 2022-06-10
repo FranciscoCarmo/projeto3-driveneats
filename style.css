@@ -36,6 +36,7 @@ header {
   padding: 0 21px;
 
   box-shadow: 0 5px 3px rgb(170, 170, 170);
+  z-index: 5;
 }
 
 header h1 {
@@ -53,6 +54,7 @@ header p {
 .conteudo {
   width: 100%;
   max-width: 614px;
+
   margin-top: 92px;
 
   display: flex;
@@ -72,6 +74,7 @@ header p {
   width: 100%;
   display: flex;
   overflow-x: scroll;
+  align-items: center;
 }
 
 .prato {
@@ -88,12 +91,36 @@ header p {
   display: flex;
   flex-direction: column;
 
-  padding: 15px 16px;
+  position: relative;
+
+  padding: 15px 14px;
 }
 
 .prato:last-child {
   margin-right: 19px;
 }
+
+/* Classes do botao selecionado */
+.correto {
+  display: none;
+}
+
+.corretoSelecionado {
+  height: 19px;
+  width: 19px;
+  position: absolute;
+  bottom: 7px;
+  right: 7px;
+  display: block;
+}
+
+.selecionado {
+  border: solid 7px #32b72f;
+  width: 186px;
+  height: 211px;
+}
+
+/* ------------------*/
 
 .foto {
   height: 87px;
@@ -158,4 +185,10 @@ footer button {
   background-color: #cbcbcb;
   color: white;
   font-size: 20px;
+  cursor: pointer;
+}
+
+.botaoLiberado {
+  background-color: #32b72f;
+  font-weight: 700;
 }
