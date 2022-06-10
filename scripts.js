@@ -116,16 +116,64 @@ let frase = "";
 let linkWpp = "";
 
 botao.addEventListener("click", function () {
-  if (numSelecionados === 3) {
+  //adiciona HTML dos pratos
+  pedidos = document.querySelectorAll(".pedido");
+  for (let i = 0; i < pedidos.length; i++) {
+    pedidos[i].children[0].innerHTML = carrinho.pratoSelecionado[i];
+    pedidos[i].children[1].innerHTML =
+      "R$ " + carrinho.preco[i].toFixed(2).replace(".", ",");
+  }
+
+  valorTotal = document.querySelector(".valorTotal");
+  valorTotal.innerHTML = `R$ ${(
+    carrinho.preco[0] +
+    carrinho.preco[1] +
+    carrinho.preco[2]
+  )
+    .toFixed(2)
+    .replace(".", ",")}`;
+
+  //Tela de confirmacao de compra
+  painelConfirmacao = document.querySelector(".sobretela");
+  painelConfirmacao.classList.toggle("apagado");
+});
+
+botaoConfirmar = document.querySelector(".confirmar");
+botaoCancelar = document.querySelector(".cancelar");
+
+botaoCancelar.addEventListener("click", function () {
+  painelConfirmacao.classList.toggle("apagado");
+});
+
+botaoConfirmar.addEventListener("click", function () {
+  // Pergunta o endereco
+  let nome = "";
+  let endereco = "";
+
+  while (nome == "") {
+    nome = prompt("Qual é o seu nome? ");
+
+    if (nome == "") alert("Digite seu nome corretamente");
+  }
+
+  while (endereco == "") {
+    endereco = prompt("Qual seu endereço? ");
+
+    if (endereco == "") alert("Digite seu endereco corretamente");
+  }
+
+  // Envia a mensagem
+  if (numSelecionados === 3 && nome && endereco) {
     frase = `Olá, gostaria de fazer o pedido: \n
   - Prato: ${carrinho.pratoSelecionado[0]}  \n
   - Bebida: ${carrinho.pratoSelecionado[1]}  \n
   - Sobremesa: ${carrinho.pratoSelecionado[2]}  \n
-  Total: R$ ${(
-    carrinho.preco[0] +
-    carrinho.preco[1] +
-    carrinho.preco[2]
-  ).toFixed(2)} \n`;
+  Total: R$ ${(carrinho.preco[0] + carrinho.preco[1] + carrinho.preco[2])
+    .toFixed(2)
+    .replace(".", ",")} \n \n
+  Nome: ${nome} \n
+  Endereço: ${endereco}
+    `;
 
     pedido = encodeURIComponent(frase);
 

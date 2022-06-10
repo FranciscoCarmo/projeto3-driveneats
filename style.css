@@ -18,6 +18,9 @@ body {
   display: flex;
   justify-content: center;
   margin: 0 auto;
+  background-color: #e5e5e5;
+
+  height: calc(1026px + 92px + 46px);
 }
 
 header {
@@ -197,4 +200,98 @@ footer button {
   background-color: #32b72f;
   font-weight: 700;
   cursor: pointer;
+}
+/* Comeca as telas de confirmacao */
+.sobretela {
+  height: calc(1026px + 92px + 46px);
+  width: 100%;
+  background-color: rgb(255, 255, 255, 0.8);
+  position: absolute;
+  top: 0;
+  z-index: 6;
+
+  display: flex;
+  justify-content: center;
+}
+
+.painelConfirmacao {
+  height: 353px;
+  width: 377px;
+  background-color: #50d074;
+  border-radius: 9px;
+  color: white;
+  font-size: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 23px;
+
+  position: sticky;
+  top: 300px;
+  margin-top: 300px;
+}
+
+.painelConfirmacao h3 {
+  margin: 23px 0;
+  font-weight: bold;
+}
+.pedido {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-items: right;
+  margin-bottom: 13px;
+  position: relative;
+}
+.pedido div:nth-child(2) {
+  position: absolute;
+  right: 0;
+}
+
+.total {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-items: right;
+  font-weight: bold;
+  margin-top: 10px;
+  position: relative;
+}
+
+.valorTotal {
+  position: absolute;
+  right: 0;
+}
+
+.confirmar {
+  height: 52px;
+  width: 329px;
+  border-radius: 100px;
+  background-color: white;
+  color: #50d074;
+  border: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+
+  margin-top: 26px;
+}
+
+.cancelar {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  background-color: #50d074;
+  border: none;
+  cursor: pointer;
+
+  margin-top: 16px;
+}
+
+.apagado {
+  display: none;
 }
