@@ -1,8 +1,9 @@
-function seleciona(prato, pratos) {
+function seleciona(prato, pratos, foiSelecionado) {
   if (prato.lastElementChild.classList[0] == "corretoSelecionado") {
     prato.lastElementChild.classList.remove("corretoSelecionado");
     prato.lastElementChild.classList.add("correto");
     prato.classList.toggle("selecionado");
+    foiSelecionado = 0;
   } else {
     for (const x of pratos) {
       x.className = "prato";
@@ -10,9 +11,23 @@ function seleciona(prato, pratos) {
       x.lastElementChild.classList.add("correto");
     }
 
+    foiSelecionado = 1;
     prato.classList.toggle("selecionado");
     prato.lastElementChild.classList.remove("correto");
     prato.lastElementChild.classList.add("corretoSelecionado");
+  }
+  return foiSelecionado;
+}
+
+function liberaBotao(botao, numSelecionados, botaoEstaAtivado) {
+  if (numSelecionados == 3) {
+    botao.classList.add("botaoLiberado");
+    botao.innerHTML = "Fechar pedido";
+    botaoEstaAtivado = true;
+  } else {
+    botao.classList.remove("botaoLiberado");
+    botao.innerHTML = "Selecione os 3 itens <br />para fechar o pedido";
+    botaoEstaAtivado = false;
   }
 }
 
@@ -32,38 +47,90 @@ let a = 0;
 let b = 0;
 let c = 0;
 
+let botaoEstaAtivado = false;
+let carrinho = {
+  pratoSelecionado: [],
+  preco: [],
+};
+
 for (let prato of pratos) {
   prato.addEventListener("click", function () {
-    seleciona(prato, pratos);
-    a = 1;
-    numSelecionados = a + b + c;
-    if (numSelecionados >= 3) {
-      botao.classList.add("botaoLiberado");
-      botao.innerText = "Fechar pedido";
+    a = seleciona(prato, pratos, a);
+    if (a === 1) {
+      carrinho.pratoSelecionado[0] = prato.children[1].innerText;
+      carrinho.preco[0] = prato.children[3].innerText;
+      //converte para numero
+      carrinho.preco[0] = Number(
+        carrinho.preco[0].substring(3).replace(",", ".")
+      );
+    } else if (a === 0) {
+      carrinho.pratoSelecionado[0] = "";
+      carrinho.preco[0] = "";
     }
+
+    numSelecionados = a + b + c;
+    liberaBotao(botao, numSelecionados, botaoEstaAtivado);
   });
 }
 
 for (let bebida of bebidas) {
   bebida.addEventListener("click", function () {
-    seleciona(bebida, bebidas);
-    b = 1;
-    numSelecionados = a + b + c;
-    if (numSelecionados >= 3) {
-      botao.classList.add("botaoLiberado");
-      botao.innerText = "Fechar pedido";
+    b = seleciona(bebida, bebidas, b);
+    if (b === 1) {
+      carrinho.pratoSelecionado[1] = bebida.children[1].innerText;
+      carrinho.preco[1] = bebida.children[3].innerText;
+      //converte para numero
+      carrinho.preco[1] = Number(
+        carrinho.preco[1].substring(3).replace(",", ".")
+      );
+    } else if (b === 0) {
+      carrinho.pratoSelecionado[1] = "";
+      carrinho.preco[1] = "";
     }
+
+    numSelecionados = a + b + c;
+    liberaBotao(botao, numSelecionados, botaoEstaAtivado);
   });
 }
 
 for (let sobremesa of sobremesas) {
   sobremesa.addEventListener("click", function () {
-    seleciona(sobremesa, sobremesas);
-    c = 1;
-    numSelecionados = a + b + c;
-    if (numSelecionados >= 3) {
-      botao.classList.add("botaoLiberado");
-      botao.innerText = "Fechar pedido";
+    c = seleciona(sobremesa, sobremesas, c);
+    if (c === 1) {
+      carrinho.pratoSelecionado[2] = sobremesa.children[1].innerText;
+      carrinho.preco[2] = sobremesa.children[3].innerText;
+      //converte para numero
+      carrinho.preco[2] = Number(
+        carrinho.preco[2].substring(3).replace(",", ".")
+      );
+    } else if (c === 0) {
+      carrinho.pratoSelecionado[2] = "";
+      carrinho.preco[2] = "";
     }
+
+    numSelecionados = a + b + c;
+    liberaBotao(botao, numSelecionados, botaoEstaAtivado);
   });
 }
+let frase = "";
+let linkWpp = "";
+
+botao.addEventListener("click", function () {
+  if (numSelecionados === 3) {
+    frase = `Olá, gostaria de fazer o pedido: \n
+  - Prato: ${carrinho.pratoSelecionado[0]}  \n
+  - Bebida: ${carrinho.pratoSelecionado[1]}  \n
+  - Sobremesa: ${carrinho.pratoSelecionado[2]}  \n
+  Total: R$ ${(
+    carrinho.preco[0] +
+    carrinho.preco[1] +
+    carrinho.preco[2]
+  ).toFixed(2)} \n`;
+
+    pedido = encodeURIComponent(frase);
+
+    linkWpp = "https://wa.me/5531993605558?text=" + pedido;
+
+    open(linkWpp);
+  }
+});
