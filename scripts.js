@@ -164,14 +164,16 @@ botaoConfirmar.addEventListener("click", function () {
 
   // Envia a mensagem
   if (numSelecionados === 3 && nome && endereco) {
-    frase = `Olá, gostaria de fazer o pedido: \n
-  - Prato: ${carrinho.pratoSelecionado[0]}  \n
-  - Bebida: ${carrinho.pratoSelecionado[1]}  \n
-  - Sobremesa: ${carrinho.pratoSelecionado[2]}  \n
-  Total: R$ ${(carrinho.preco[0] + carrinho.preco[1] + carrinho.preco[2])
-    .toFixed(2)
-    .replace(".", ",")} \n \n
-  Nome: ${nome} \n
+    frase = `Olá, gostaria de fazer o pedido:
+  - Prato: ${carrinho.pratoSelecionado[0]}  
+  - Bebida: ${carrinho.pratoSelecionado[1]}  
+  - Sobremesa: ${carrinho.pratoSelecionado[2]}  
+  Total: R$ ${(
+    carrinho.preco[0] +
+    carrinho.preco[1] +
+    carrinho.preco[2]
+  ).toFixed(2)} \n 
+  Nome: ${nome} 
   Endereço: ${endereco}
     `;
 
