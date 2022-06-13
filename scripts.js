@@ -116,26 +116,28 @@ let frase = "";
 let linkWpp = "";
 
 botao.addEventListener("click", function () {
-  //adiciona HTML dos pratos
-  pedidos = document.querySelectorAll(".pedido");
-  for (let i = 0; i < pedidos.length; i++) {
-    pedidos[i].children[0].innerHTML = carrinho.pratoSelecionado[i];
-    pedidos[i].children[1].innerHTML =
-      "R$ " + carrinho.preco[i].toFixed(2).replace(".", ",");
+  if (numSelecionados == 3) {
+    //adiciona HTML dos pratos
+    pedidos = document.querySelectorAll(".pedido");
+    for (let i = 0; i < pedidos.length; i++) {
+      pedidos[i].children[0].innerHTML = carrinho.pratoSelecionado[i];
+      pedidos[i].children[1].innerHTML =
+        "R$ " + carrinho.preco[i].toFixed(2).replace(".", ",");
+    }
+
+    valorTotal = document.querySelector(".valorTotal");
+    valorTotal.innerHTML = `R$ ${(
+      carrinho.preco[0] +
+      carrinho.preco[1] +
+      carrinho.preco[2]
+    )
+      .toFixed(2)
+      .replace(".", ",")}`;
+
+    //Tela de confirmacao de compra
+    painelConfirmacao = document.querySelector(".sobretela");
+    painelConfirmacao.classList.toggle("apagado");
   }
-
-  valorTotal = document.querySelector(".valorTotal");
-  valorTotal.innerHTML = `R$ ${(
-    carrinho.preco[0] +
-    carrinho.preco[1] +
-    carrinho.preco[2]
-  )
-    .toFixed(2)
-    .replace(".", ",")}`;
-
-  //Tela de confirmacao de compra
-  painelConfirmacao = document.querySelector(".sobretela");
-  painelConfirmacao.classList.toggle("apagado");
 });
 
 botaoConfirmar = document.querySelector(".confirmar");
